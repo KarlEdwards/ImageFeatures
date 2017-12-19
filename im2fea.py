@@ -28,23 +28,11 @@ Bibliography:
 """
 
 # Example Usage:
-# python3 -W "ignore:compiletime:RuntimeWarning::0" im2fea.py -m XCEPTION --path /Users/Karl/VLC_stuff/frames/Samples/
-# python3 -W "ignore:compiletime:RuntimeWarning::0" im2fea.py -m XCEPTION --path /Users/Karl/VLC_stuff/frames/Samples/ --output features.csv
-# python3 -W "ignore:compiletime:RuntimeWarning::0" im2fea.py -m RESNET50 --path /Users/Karl/VLC_stuff/frames/Samples/ --output features.csv
 
-# python3 -W "ignore:compiletime:RuntimeWarning::0" im2fea.py -m RESNET50 --path /Users/Karl/VLC_stuff/frames/color/ --output features_color_resnet50.csv
 # python3 -W "ignore:compiletime:RuntimeWarning::0" im2fea.py -m VGG16 --path /Users/Karl/VLC_stuff/frames/color/ --output features_color_vgg16.csv
-# python3 -W "ignore:compiletime:RuntimeWarning::0" im2fea.py -m VGG19 --path /Users/Karl/VLC_stuff/frames/color/ --output features_color_vgg19.csv
-# python3 -W "ignore:compiletime:RuntimeWarning::0" im2fea.py -m MOBILENET --path /Users/Karl/VLC_stuff/frames/color/ --output features_color_mobilenet.csv
 
-
-# python3 -W "ignore:compiletime:RuntimeWarning::0" im2fea.py -m MOBILENET --path /Users/Karl/VLC_stuff/frames/bw500/ --output features_bw500_mobilenet.csv
-
-#python3 -W "ignore:compiletime:RuntimeWarning::0" im2fea.py -m XCEPTION --path /Users/Karl/VLC_stuff/frames/color/ --output features_color_xception.csv
-#ValueError: Error when checking : expected input_1 to have shape (None, 299, 299, 3) but got array with shape (1, 224, 224, 3)
-
-import config  # Get configured parameters
-import image_processing as fn      # Get image processing functions
+import config
+import image_processing as fn
 import sys
 
 # -----------------------------------------------
@@ -53,7 +41,6 @@ import sys
 
 def main(argv):
     pixels = ( 224, 224 )
-    print( '\n----------------------------------------' )
     # Get command-line arguments
     cfg = config.get_args( argv )
     config.show_args( cfg )
@@ -66,14 +53,6 @@ def main(argv):
     features = fn.get_feature_recs( model, pre, cfg.path, pixels ) # Extract features from image files
     fn.save_features( features, cfg.output )
     print( '\nFound ' + str( len( features )) + ' records.')
-    print( '\nDone.\n--------------------------------------' )
-
-# -----------------------------------------------
-# Exit from Python by raising the SystemExit exception,
-# so that cleanup actions specified by finally clauses
-# of try statements are honored, and it is possible to
-# intercept the exit attempt at an outer level.
-# -----------------------------------------------
 
 if __name__ == '__main__':
     sys.exit( main( sys.argv ))
