@@ -8,6 +8,7 @@ from keras.preprocessing.image import img_to_array
 from preprocess import preprocessors
 
 def perform( fun, args ):
+    """ Apply the specified function to specified arguments """
     return fun( args )
 
 def switch( selected, choice ):

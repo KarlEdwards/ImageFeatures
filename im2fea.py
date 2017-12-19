@@ -31,16 +31,29 @@ Bibliography:
 
 # python3 -W "ignore:compiletime:RuntimeWarning::0" im2fea.py -m VGG16 --path /Users/Karl/VLC_stuff/frames/color/ --output features_color_vgg16.csv
 
+# -----------------------------------------------
+# Check to make sure we have TensorFlow backend:
+# -----------------------------------------------
+import sys
+def is_venv():
+    return (hasattr(sys, 'real_prefix') or
+            (hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix))
+
+if not is_venv():
+    print('** ** Tensorflow virtual environment not found !! ** **\n\tPlease run:\nsource ~/tensorflow/bin/activate')
+    sys.exit()
+# -----------------------------------------------
+
+
 import config
 import image_processing as fn
-import sys
+from pretrained_models import get_shape
 
 # -----------------------------------------------
 #   M A I N   P R O G R A M
 # -----------------------------------------------
 
 def main(argv):
-    pixels = ( 224, 224 )
     # Get command-line arguments
     cfg = config.get_args( argv )
     config.show_args( cfg )
@@ -48,6 +61,7 @@ def main(argv):
     
     # Get the pre-trained model
     pre = fn.get_preprocessor( cfg.model )
+    pixels = get_shape( cfg.model )
 
     # Extract and save the feature vectors
     features = fn.get_feature_recs( model, pre, cfg.path, pixels ) # Extract features from image files
