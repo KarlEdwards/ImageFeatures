@@ -1,5 +1,5 @@
 # ImageFeatures
-Use a pre-trained model to extract features from images. Choose any of these:
+Use a pre-trained model to extract features from images. At the moment, the only weights available are from training on ImageNet data. Choose any of these models:
 * XCEPTION
 * VGG16
 * VGG19
@@ -11,5 +11,5 @@ Use a pre-trained model to extract features from images. Choose any of these:
 #### First Activate TensorFlow:
 source ~/tensorflow/bin/activate
 
-#### Then use MOBILENET, pretrained on ImageNet, to obtain image features
+#### Then extract features, in this case, using MOBILENET:
 python3 im2fea.py -m MOBILENET --path /to/image/files/ --output features_mobilenet.csv
