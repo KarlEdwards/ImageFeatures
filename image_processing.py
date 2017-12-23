@@ -82,7 +82,6 @@ def save_features( records, base_name ):
     with open( base_name, 'w', newline='') as csv_file:
         feature_file = csv.writer( csv_file, delimiter = ',' )
         for record in records:
-            feature_file.writerow( record )
             if record is None:
                 pass
             else:
